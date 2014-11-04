@@ -105,7 +105,7 @@ public class Lane {
 	public String toString() {
 		int i = 0;
 		String s = "<-";
-		while (i < getLength() - 1) {
+		while (i < getLength()) {
 			if (theLane[i].getCurrentCar() != null) {
 				s += theLane[i].getCurrentCar().toString();
 			} else {

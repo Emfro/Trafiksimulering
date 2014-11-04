@@ -68,19 +68,34 @@ public class Simulation {
 
 	
 	
-    public static void main(String [] args) {
-    	TrafficSystem sim = new	TrafficSystem(10, 3, 10, 5, 10, 5, 4); // (r0, r1 o r2, period s1, green s1, period s2, green s2, ankonstint.)
+    
+	public static void main(String [] args) {
+    	
     	Scanner sc = new Scanner(System.in);
     	System.out.println("For how long time should the Simulation go?\n Enter Number: "); 
     	int time = sc.nextInt();
-    	
-    	
+    	System.out.println("Please choose length for lanes, time for lights and Car intesity\n First Lane");
+    	int First_Lane = sc.nextInt();
+    	System.out.println("turn lanes");
+    	int turn_lanes = sc.nextInt();
+    	System.out.println("Period for lights");
+    	int Period_light_FT = sc.nextInt();
+    	System.out.println("Green Time Straight");
+    	int green_F = sc.nextInt();
+    	System.out.println("Green Time turn");
+    	int green_T = sc.nextInt();
+    	System.out.println("Car intesity (High value => low intesity)");
+    	int Ankomstintesitet = sc.nextInt();
+    	TrafficSystem sim = new	TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, Period_light_FT, green_T, Ankomstintesitet);
+    	// (r0, r1 o r2, period s1, green s1, period s2, green s2, ankonstint.)
+    	sc.close();
     	while(time >= 0){
     		sim.step();
     		sim.print();
     		time--;
-    		
+   
     	}
+    	sim.printStatistics();
     //sim.AvarageTime();
 	// Skapar ett TrafficSystem
 	// Utför stegningen, anropar utskriftsmetoder
