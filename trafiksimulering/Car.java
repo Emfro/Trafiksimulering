@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 
 public class Car {
-
     private int bornTime;
     private int destination; 
     // 0 > Rakt fram  0 =<  Sväng
@@ -45,9 +44,9 @@ public class Car {
 
     public String toString(){
     	if(this.getDestination() > 0) {
-    		return "[F]";
+    		return "[<]";
     	}else{
-    		return   "[T]";
+    		return   "[v]";
     	}
     }
    // public static void main(String args[]){

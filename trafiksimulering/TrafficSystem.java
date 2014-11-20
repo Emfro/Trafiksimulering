@@ -51,12 +51,21 @@ public class TrafficSystem {
 	public Car CreateCar(){
 		Random rand = new Random();
 		int Dest = rand.nextInt(10)+1;
-		
-		if(Dest <= 5){
-			return  new Car(time, 1, r0.lastSpot());
-		}else {
-			return  new Car(time, 0, r0.lastSpot());
-		}	
+		int identity = rand.nextInt(10)+1;
+		if (identity<=8){
+			if(Dest <= 5){
+				return  new Car(time, 1, r0.lastSpot());
+			}else {
+				return  new Car(time, 0, r0.lastSpot());
+			}	
+		}
+		else{
+			if(Dest <= 5){
+				return  new Ferrari(time, 1, r0.lastSpot());
+			}else {
+				return  new Ferrari(time, 0, r0.lastSpot());
+			}	
+		}
 	}
 	public int AvarageTime(){
 		AvarageCarTime = TotalCarTime/getCars();
@@ -116,9 +125,13 @@ public class TrafficSystem {
     	r2.step();
     	
     	if(r0.firstCar() != null){
+    		Car c = r0.firstCar();
     		if(r0.firstCar().getDestination() > 0){
     			if(r1.lastFree()){
-    		r1.putLast(r0.getFirst());
+    				Car c2 = r0.getFirst();
+    				if(c==c2){
+    					r1.putLast(c2);
+    				}
     			}
     		}
     	
@@ -160,6 +173,7 @@ public class TrafficSystem {
     }
 
     public void print() {
+    	System.out.flush();
     	String s = s1.toString() + "\n" + s2.toString() + "\n" + r1.toString() + r0.toString() + "\n" + r2.toString();
     	System.out.println(s);
 	// Skriv ut en grafisk representation av kösituationen
