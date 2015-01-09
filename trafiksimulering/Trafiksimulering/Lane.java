@@ -1,11 +1,6 @@
 public class Lane {
 
-	public static class OverflowException extends RuntimeException {
-
-		// Undantag som kastas när det inte gick att lägga
-		// in en ny bil på vägen
-	}
-
+	
 	protected CarPosition[] theLane;
 
 	public Lane(int n) {
@@ -20,7 +15,11 @@ public class Lane {
 		// Konstruerar ett Lane-objekt med plats för n fordon
 		// Samt länker ihop varje CarPosition med forward för den framför
 	}
-
+	public CarPosition getCarSpot(int pos)throws RuntimeException{
+		if(pos > getLength()) throw RuntimeException("out of bound position");
+	
+			return null;
+	}
 	public boolean matchEnd(CarPosition target) {
 		if (theLane[0] == target)
 			return true;

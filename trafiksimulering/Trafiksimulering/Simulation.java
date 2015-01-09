@@ -91,7 +91,7 @@ public class Simulation {
     	int green_T = sc.nextInt();
     	System.out.println("Car intesity (High value => low intesity)");
     	int Ankomstintesitet = sc.nextInt();
-    	TrafficSystem sim = new	TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, Period_light_FT, green_T, Ankomstintesitet);
+    	TrafficSystem sim = new TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, green_T, Ankomstintesitet);
     	// (r0, r1 o r2, period s1, green s1, period s2, green s2, ankonstint.)
     	sc.close();
     	while(time >= 0){
