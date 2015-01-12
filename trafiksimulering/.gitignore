@@ -1,7 +1,15 @@
 /Car.class
 /CarPosition.class
+/CarPositionTest.class
+/CarTest.class
+/Ferrari.class
 /Lane$OverflowException.class
 /Lane.class
+/LaneTest.class
 /Light.class
+/LightTest.class
 /Simulation.class
+/SimulationTest.class
 /TrafficSystem.class
+/TrafficSystemTest.class
+/Test.class

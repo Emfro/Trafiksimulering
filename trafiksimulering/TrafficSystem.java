@@ -32,14 +32,14 @@ public class TrafficSystem {
 		int Ai = rand.nextInt(n)+1;
 		this.NextCar = Ai;
 	}
-	public TrafficSystem(int r0,  int r, int s1Period, int s1Green, int s2Period, int s2Green, int Ankomstintensitet){
+	public TrafficSystem(int r0,  int r, int s1Period, int s1Green,  int s2Green, int Ankomstintensitet){
 		
     	this.r0 = new Lane(r0);
     	this.r1 = new Lane(r);
     	this.r2 = new Lane(r);
     	this.r2.firstSpot().setTurn(1);
     	this.s1 = new Light(s1Period,s1Green);
-    	this.s2 = new Light(s2Period,s2Green);
+    	this.s2 = new Light(s1Period,s2Green);
     	this.Ankomstintesitet = Ankomstintensitet;
     	nextcar(this.Ankomstintesitet);
     	
@@ -54,16 +54,16 @@ public class TrafficSystem {
 		int identity = rand.nextInt(10)+1;
 		if (identity<=8){
 			if(Dest <= 5){
-				return  new Car(time, 1, r0.lastSpot());
+				return  new Car(getTime(), 1, r0.lastSpot());
 			}else {
-				return  new Car(time, 0, r0.lastSpot());
+				return  new Car(getTime(), 0, r0.lastSpot());
 			}	
 		}
 		else{
 			if(Dest <= 5){
-				return  new Ferrari(time, 1, r0.lastSpot());
+				return  new Ferrari(getTime(), 1, r0.lastSpot());
 			}else {
-				return  new Ferrari(time, 0, r0.lastSpot());
+				return  new Ferrari(getTime(), 0, r0.lastSpot());
 			}	
 		}
 	}
@@ -72,7 +72,7 @@ public class TrafficSystem {
 		return AvarageCarTime;
 	}
 	public int carTime(Car c){
-		return this.time - c.getBornTime(); 
+		return this.getTime() - c.getBornTime(); 
 	} 
     public void readParameters() {
 	// Läser in parametrar för simuleringen
@@ -125,41 +125,28 @@ public class TrafficSystem {
     	r2.step();
     	
     	if(r0.firstCar() != null){
-    		Car c = r0.firstCar();
-    		if(r0.firstCar().getDestination() > 0){
-    			if(r1.lastFree()){
-    				Car c2 = r0.getFirst();
-    				if(c==c2){
-    					r1.putLast(c2);
-    				}
-    			}
-    		}
-    	
-    		else{    	
-    			if(r2.lastFree()){
+    		
+    		if(r0.firstCar().getDestination() > 0){   		
+    			r1.putLast(r0.getFirst());	
+    		}   	
+    		else{    	  			
     			r2.putLast(r0.getFirst());
-    			}
     		}
     	}
-    	
     	
     	r0.step();
     	
     	if(this.NextCar != 0){
     		this.NextCar--;
-    	}else{ 
-    		if(r0.lastFree()){
+    		
+    	}
+    	else{     		
     		r0.putLast(CreateCar());
     		nextcar(Ankomstintesitet);
-    		}
     	}
-    	
-    	
-    	
-    	
     	s1.step();
     	s2.step();
-    	this.time++;
+    	this.setTime(this.getTime() + 1);
     	
     }
     	
@@ -194,6 +181,12 @@ public class TrafficSystem {
 	public int getCars(){
 		return CarsF + CarsT;
 		
+	}
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
 	}
 
 } 	

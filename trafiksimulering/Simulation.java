@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import org.omg.CORBA.DynAnyPackage.InvalidValue;
+
  /*
   Modell för trafiksimulering
   ===========================
@@ -69,11 +71,14 @@ public class Simulation {
 	
 	
     
-	public static void main(String [] args) {
+	public static void main(String [] args) throws InvalidValue {
     	
     	Scanner sc = new Scanner(System.in);
     	System.out.println("For how long time should the Simulation go?\n Enter Number: "); 
     	int time = sc.nextInt();
+    	if(time <= 0) {
+    		sc.close();
+    		throw new InvalidValue("\n InvalidValue: The time must be larger than 0");}
     	System.out.println("Please choose length for lanes, time for lights and Car intesity\n First Lane");
     	int First_Lane = sc.nextInt();
     	System.out.println("turn lanes");
@@ -86,7 +91,7 @@ public class Simulation {
     	int green_T = sc.nextInt();
     	System.out.println("Car intesity (High value => low intesity)");
     	int Ankomstintesitet = sc.nextInt();
-    	TrafficSystem sim = new	TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, Period_light_FT, green_T, Ankomstintesitet);
+    	TrafficSystem sim = new TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, green_T, Ankomstintesitet);
     	// (r0, r1 o r2, period s1, green s1, period s2, green s2, ankonstint.)
     	sc.close();
     	while(time >= 0){

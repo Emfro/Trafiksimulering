@@ -8,7 +8,9 @@ public class Car {
     // 0 > Rakt fram  0 =<  Sväng
     private CarPosition currentPosition;
     
-   
+    public Car cloneCar() {
+    	return new Car(getBornTime(), getDestination(), getCurrent_position() );
+    }
     public void step(){
     	if(currentPosition != null && currentPosition.moveForward()){
     		
@@ -54,4 +56,17 @@ public class Car {
     //	Car bob = new Car(null, null);
     //	System.out.println(bob);
    // }
+    public static void main(String [] args){
+    	
+    	Car a = new Car(1,1,null);
+    	Car b = a;
+    	a.setDestination(2);
+    	System.out.println("Car a dest   = " + a.getDestination());
+    	System.out.println("Car b dest  = " + b.getDestination());
+    	
+    	b = a.cloneCar();
+    	a.setDestination(3);
+    	System.out.println("Car a dest with Copying = " + a.getDestination());
+    	System.out.println("Car b dest with Copying = " + b.getDestination());
+    }
 }
