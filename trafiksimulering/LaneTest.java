@@ -11,11 +11,17 @@ public class LaneTest {
 		Lane tester = new Lane(10);
 		Car testCar = new Car(1,1,null);
 				
-//		Tests lastFree
+/**
+ * 		Tests lastFree
+ */
 		assertEquals(true, tester.lastFree());
-//		Adds car to last spot
+/**
+ * 		Adds car to last spot
+ */
 		tester.putLast(testCar);
-//		Tests if last spot is free again and tests putLast
+/**
+ * 		Tests if last spot is free again and tests putLast
+ */
 		assertEquals(false, tester.lastFree());
 		
 		testCar.setCurrentPosition(tester.getCarSpot(5));
@@ -23,11 +29,13 @@ public class LaneTest {
 		tester.getCarSpot(5).setCurrentCar(testCar);
 		
 		tester.step();
-		
+	/**
+	 * tests if	the car has moved a step forward
+	 */
 		assertEquals(tester.getCarSpot(4).getCurrentCar(),testCar);
 		
 		
-		fail("Not yet implemented");
+		
 	}
 
 }

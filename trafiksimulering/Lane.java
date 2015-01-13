@@ -2,7 +2,10 @@ public class Lane {
 
 	
 	protected CarPosition[] theLane;
-
+	/**
+	 * Lane() creates a Lane of a list of CarPositions
+	 * @param n is a integer deciding how many CarPositions there will be in the new Lane
+	 */
 	public Lane(int n) {
 		theLane = new CarPosition[n];
 
@@ -15,6 +18,7 @@ public class Lane {
 		// Konstruerar ett Lane-objekt med plats för n fordon
 		// Samt länker ihop varje CarPosition med forward för den framför
 	}
+	
 	public CarPosition getCarSpot(int pos){
 		if(pos > getLength()-1) throw new RuntimeException("out of bound position");
 		else 
@@ -41,7 +45,9 @@ public class Lane {
 //			i++;
 //		}
 //	}
-
+	/**
+	 * Step() moves the cars in the Lane if possible
+	 */
 	public void step() {
 
 		int i = 1;
@@ -60,35 +66,56 @@ public class Lane {
 		// (om det går). (Fordonet på plats 0 tas bort utifrån
 		// mm h a metoden nedan.)
 	}
-
+	/**
+	 * firstSpot()
+	 * @return the first CarPosition in the Lane
+	 */
 	public CarPosition firstSpot() {
 		CarPosition first = theLane[0];
 		return first;
 	}
-
+	/**
+	 * lastSpot()
+	 * @return the last CarPosition in the Lane
+	 */
 	public CarPosition lastSpot() {
 		int i = getLength();
 		return theLane[i - 1];
 	}
-
+	/**
+	 * getFirst()
+	 * @return the car positioned at the first spot in the Lane and removes it from that Position
+	 */
 	public Car getFirst() {
-		Car First = theLane[0].getCurrentCar();
+		if(theLane[0].getCurrentCar() != null){
+		Car First = theLane[0].getCurrentCar().cloneCar();
 		theLane[0].setCurrentCar(null);
-		return First;
+		return First;}
+		else 
+			return null;
 		// Returnera och tag bort bilen som står först
 	}
-
+	/**
+	 * firstCar()
+	 * @return the car positioned at the first spot in the lane without removing it from that position
+	 */
 	public Car firstCar() {
 		return theLane[0].getCurrentCar();
 		// Returnera bilen som står först utan att ta bort den
 	}
-
+	/**
+	 * lastFree()
+	 * @return if the last spot is null
+	 */
 	public boolean lastFree() {
 		int i = getLength() - 1;
 		return (theLane[i].getCurrentCar() == null);
 		// Returnera true om sista platsen ledig, annars false
 	}
-
+	/**
+	 * putLast() puts a Car c in the last CarPosition in the Lane if possible
+	 * @param c is the car which is put at the end of the Lane
+	 */
 	public void putLast(Car c) {
 		if (!lastFree()) {
 				throw new RuntimeException("There is an ovwerflow of cars in the lanes! \n Please retart the program and choose new settings.");

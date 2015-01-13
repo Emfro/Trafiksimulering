@@ -11,6 +11,10 @@ public class CarPosition{
 	private CarPosition forward;
 	private int turn = 0;
 	
+	/**
+	 * Creates a CarPosition
+	 * @param a_Owner is a list of CarPositions which this CarPosition is in
+	 */
 	public CarPosition(Lane a_Owner){
 		
 		owner = a_Owner;
@@ -20,7 +24,10 @@ public class CarPosition{
 		
 		return owner.matchEnd(target);
 	}
-	
+	/**
+	 * boolean moveForward() 
+	 * @return if this CarPosition's forward is null
+	 */
 	public boolean moveForward(){
 		
 	 if(getForward() != null){

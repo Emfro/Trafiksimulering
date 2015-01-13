@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.util.Scanner;  
+  
 
 
 public class Car {
@@ -11,6 +10,9 @@ public class Car {
     public Car cloneCar() {
     	return new Car(getBornTime(), getDestination(), getCurrent_position() );
     }
+   /**
+    * Step move the car forward if possible.
+    */
     public void step(){
     	if(currentPosition != null && currentPosition.moveForward()){
     		
@@ -19,6 +21,12 @@ public class Car {
      }
       	// Uppdatera bilen ett tidssteg
     }
+    /**
+     *  Car creates a new car
+     * @param bornTime is a integer showing when the car is born
+     * @param dest is a integer deciding if the car is going to turn or not
+     * @param startingPos is the CarPosition where the car is created on
+     */
     public Car(int bornTime, int dest, CarPosition startingPos){
     	this.bornTime = bornTime;
     	destination = dest;

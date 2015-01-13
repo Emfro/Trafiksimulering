@@ -70,7 +70,11 @@ public class Simulation {
 
 	
 	
-    
+    /**
+     * main() reads inputs from the user and invokes the creation of a new trafficsystem with the parameters given
+     * @param args
+     * @throws InvalidValue if the user input for time is invalid
+     */
 	public static void main(String [] args) throws InvalidValue {
     	
     	Scanner sc = new Scanner(System.in);
@@ -81,20 +85,44 @@ public class Simulation {
     		throw new InvalidValue("\n InvalidValue: The time must be larger than 0");}
     	System.out.println("Please choose length for lanes, time for lights and Car intesity\n First Lane");
     	int First_Lane = sc.nextInt();
+    	while (First_Lane <= 0) {
+    		System.out.println("The lane must be longer than 0");
+    		First_Lane = sc.nextInt();
+    	}
     	System.out.println("turn lanes");
     	int turn_lanes = sc.nextInt();
+    	while (turn_lanes <= 0) {
+    		System.out.println("The lanes must be longer than 0");
+    		turn_lanes = sc.nextInt();
+    	}
     	System.out.println("Period for lights");
     	int Period_light_FT = sc.nextInt();
+    	while (Period_light_FT <= 0) {
+    		System.out.println("The period must be larger than 0");
+    		Period_light_FT = sc.nextInt();
+    	}
     	System.out.println("Green Time Straight");
     	int green_F = sc.nextInt();
+    	while (green_F <= 0) {
+    		System.out.println("The time must be larger than 0");
+    		green_F = sc.nextInt();
+    	}
     	System.out.println("Green Time turn");
     	int green_T = sc.nextInt();
+    	while (green_T <= 0) {
+    		System.out.println("The time must be larger than 0");
+    		green_T = sc.nextInt();
+    	}
     	System.out.println("Car intesity (High value => low intesity)");
     	int Ankomstintesitet = sc.nextInt();
+    	while (Ankomstintesitet <= 0) {
+    		System.out.println("The car intensity must be larger than 0");
+    		Ankomstintesitet = sc.nextInt();
+    	}
     	TrafficSystem sim = new TrafficSystem(First_Lane, turn_lanes, Period_light_FT, green_F, green_T, Ankomstintesitet);
     	// (r0, r1 o r2, period s1, green s1, period s2, green s2, ankonstint.)
     	sc.close();
-    	while(time >= 0){
+    	while(time > 0){
     		sim.step();
     		sim.print();
     		time--;
